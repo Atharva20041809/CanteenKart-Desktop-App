@@ -1,0 +1,66 @@
+{
+  "name": "canteenkart-desktop",
+  "productName": "CanteenKart",
+  "version": "1.0.0",
+  "description": "CanteenKart Desktop Management Application",
+  "main": "electron/main.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "electron:start": "electron .",
+    "dist:mac": "vite build && electron-builder --mac dmg --arm64"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "lucide-react": "^0.475.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "recharts": "^2.15.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "concurrently": "^9.1.2",
+    "cross-env": "^7.0.3",
+    "electron": "^34.2.0",
+    "electron-builder": "^25.1.8",
+    "vite": "^6.1.1",
+    "wait-on": "^8.0.2"
+  },
+  "build": {
+    "appId": "com.canteenkart.desktop",
+    "productName": "CanteenKart",
+    "directories": {
+      "output": "dist"
+    },
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "arm64"
+          ]
+        }
+      ],
+      "category": "public.app-category.business"
+    },
+    "files": [
+      "dist-vite/**/*",
+      "electron/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "../backend",
+        "to": "backend",
+        "filter": [
+          "**/*",
+          "!**/*.log"
+        ]
+      },
+      {
+        "from": "../.env",
+        "to": ".env"
+      }
+    ]
+  }
+}
